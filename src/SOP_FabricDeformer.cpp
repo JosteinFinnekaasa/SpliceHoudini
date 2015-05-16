@@ -72,6 +72,20 @@ FabricCore::RTVal SOP_FabricDeformer::CreatePolygonMeshRTVal(const GU_Detail& gd
 {
     FabricCore::Client client = *(sop.getView().getClient());
     FabricCore::RTVal polygonMesh = FabricCore::RTVal::Create(client, "PolygonMesh", 0, 0);
+    
+    FabricCore::RTVal geometryWrapper = FabricCore::RTVal::Create(client, "SpliceHoudiniGeometryWrapper", 0, 0);
+    try
+    {
+        std::vector<FabricCore::RTVal> args(1);
+        args[0] = FabricCore::RTVal::ConstructString(client, "PolygonMesh");
+        geometryWrapper.callMethod("", "setPolygonMesh", 1, &polygonMesh);
+    }
+    catch (FabricCore::Exception e)
+    {
+        FabricCore::Exception::Throw(
+            (std::string("[SOP_FabricDeformer::CreatePolygonMeshRTVal]: ") + e.getDesc_cstr()).c_str());
+    }
+
 
     // Setting P attribute is required before adding other point attributes
     GA_ROHandleV3 handle(gdpRef.findAttribute(GA_ATTRIB_POINT, "P"));
@@ -86,7 +100,7 @@ FabricCore::RTVal SOP_FabricDeformer::CreatePolygonMeshRTVal(const GU_Detail& gd
     {
         std::vector<FabricCore::RTVal> args(1);
         args[0] = FabricCore::RTVal::ConstructExternalArray(client, "Vec3", bufferSize, &posBuffer[0]);
-        polygonMesh.callMethod("", "setPointPositionFromHoudiniArray", 1, &args[0]);
+        geometryWrapper.callMethod("", "setP", 1, &args[0]);
     }
     catch (FabricCore::Exception e)
     {
@@ -112,7 +126,7 @@ FabricCore::RTVal SOP_FabricDeformer::CreatePolygonMeshRTVal(const GU_Detail& gd
                                                              attrib->getTypeInfo(),
                                                              gdpRef.getNumPoints(),
                                                              client,
-                                                             polygonMesh,
+                                                             geometryWrapper,
                                                              attrName.c_str());
             }
             if (attrib->getStorageClass() == GA_STORECLASS_REAL)
@@ -121,7 +135,7 @@ FabricCore::RTVal SOP_FabricDeformer::CreatePolygonMeshRTVal(const GU_Detail& gd
                                                                 attrib->getTypeInfo(),
                                                                 gdpRef.getNumPoints(),
                                                                 client,
-                                                                polygonMesh,
+                                                                geometryWrapper,
                                                                 attrName.c_str());
             }
         }
@@ -131,7 +145,7 @@ FabricCore::RTVal SOP_FabricDeformer::CreatePolygonMeshRTVal(const GU_Detail& gd
                                                                attrib->getTypeInfo(),
                                                                gdpRef.getNumPoints(),
                                                                client,
-                                                               polygonMesh,
+                                                               geometryWrapper,
                                                                attrName.c_str());
         }
         else if (attrib->getTupleSize() == 4)
@@ -140,7 +154,7 @@ FabricCore::RTVal SOP_FabricDeformer::CreatePolygonMeshRTVal(const GU_Detail& gd
                                                                attrib->getTypeInfo(),
                                                                gdpRef.getNumPoints(),
                                                                client,
-                                                               polygonMesh,
+                                                               geometryWrapper,
                                                                attrName.c_str());
         }
     }

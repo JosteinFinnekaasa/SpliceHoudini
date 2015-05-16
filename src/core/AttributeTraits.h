@@ -44,7 +44,7 @@ struct HouToFabAttributeTraits
 template <>
 const char* HouToFabAttributeTraits<int32>::getKLTypeName(GA_TypeInfo typeInfo)
 {
-    return "Integer";
+    return "UInt32";
 }
 
 template <>
@@ -74,19 +74,19 @@ const char* HouToFabAttributeTraits<UT_Vector4F>::getKLTypeName(GA_TypeInfo type
 template <>
 const char* HouToFabAttributeTraits<int32>::getFabricMethodName(GA_TypeInfo typeInfo)
 {
-    return "setIntegerFromHoudiniPointArray";
+    return "setUInt32PointAttribute";
 }
 
 template <>
 const char* HouToFabAttributeTraits<fpreal32>::getFabricMethodName(GA_TypeInfo typeInfo)
 {
-    return "setScalarFromHoudiniPointArray";
+    return "setScalarPointAttribute";
 }
 
 template <>
 const char* HouToFabAttributeTraits<UT_Vector3F>::getFabricMethodName(GA_TypeInfo typeInfo)
 {
-    return "setVec3FromHoudiniPointArray";
+    return "setVec3PointAttribute";
 }
 
 template <>
@@ -95,9 +95,9 @@ const char* HouToFabAttributeTraits<UT_Vector4F>::getFabricMethodName(GA_TypeInf
     const char* result;
 
     if (typeInfo == GA_TYPE_COLOR)
-        result = "setColorFromHoudiniPointArray";
+        result = "setColorPointAttribute";
     else
-        result = "setVec4FromHoudiniPointArray";
+        result = "setVec4PointAttribute";
 
     return result;
 }

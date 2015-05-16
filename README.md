@@ -1,12 +1,15 @@
 # OpenSpliceHoudini
 
 Open source version of Fabric Splice for SideFx Houdini
-Only tested on OSX for now (but should work on Linux too).
 
 Here is a short video showing it in action: https://vimeo.com/127362431
 
+Build system for OSX and Linux. Fell free to contribute for the Windows build :)
+
 For access to the Fabric 2.0 Beta, you’ll want to sign up to this group:
 https://groups.google.com/forum/?hl=en#!forum/fabric-engine-beta
+
+From there you can download Fabric 2.0 and clone/build FabricUI.
 
 # Required applications and libraries
 
@@ -20,22 +23,16 @@ OpenSpliceHoudini.0.4.0 is tested using:
 I'm assuming both FabricEngine-2.0 and FabricUI are copied under a FABRIC_PARENT_DIR directory.
 You will need Qt 4.8 to build FabricUI.
 
-# FabricUI add -fPIC flag in the Linux section
-env.Append(CXXFLAGS = ['-fPIC'])
-
-# TEMPORARY
-
-You will need to add additional DCC methods from SpliceHoudini/Ext/SpliceHoudiniUtils.kl into your FabricEngine-2.0/Exts/Builtin/Geometry/PolygonMesh/PolygonMeshDCCConversion.kl.
-This is a very temporary thing until similar methods are distributed with Fabric 2.0!
-
 # Environment setup
 
 Launch Houdini shell to get the Houdini environment (on Mac, ctrl + space > Houdini Terminal)
 
-Then run those lines:
-> cd $FABRIC_PARENT_DIR/FabricEngine-2.0.0-beta-Darwin-x86_64
+Then source Fabric2.0 (already done if you just build FabricUI) and SpliceHoudini environments:
+> cd $FABRIC_PARENT_DIR/FabricEngine-pablo-Darwin-x86_64-20150514-182019
 > source environment.sh
-> export DYLD_LIBRARY_PATH=$FABRIC_PARENT_DIR/FabricEngine-2.0.0-beta-Darwin-x86_64/lib
+> cd $FABRIC_PARENT_DIR/SpliceHoudini
+> source environment.sh
+
 
 To build and install plugin:
 > make install
