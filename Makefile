@@ -1,9 +1,10 @@
+DSOSTEM = OpenSpliceHoudini
 VERSION = 0.4.0
 
 uname_S := $(shell sh -c 'uname -s 2>/dev/null || echo not')
 ifeq (${uname_S},Linux)
 	EXT = so
-else ifeq (${uname_S},Darwin)
+else ifeq (${uname_S}, Darwin)
 	EXT = dylib
 endif
 
@@ -41,11 +42,16 @@ QT_MOC	:= ${QT_DIR}/bin/moc
 
 OPTIMIZER = -g
 
+ICONS = \
+	icons/OBJ_fabricObject.png \
+	icons/SOP_fabricDeformer.png \
+	icons/SOP_fabricGenerator.png \
+
 include ${HFS}/toolkit/makefiles/Makefile.gnu
 
 # A simple Qt's moc preprocessor rule for our DFG widget 
-src/core/moc_FabricDFGWidget.cpp: src/core/${WIDGET}.h
+src/core/moc_${WIDGET}.cpp: src/core/${WIDGET}.h
 	${QT_MOC} src/core/${WIDGET}.h -o src/core/moc_${WIDGET}.cpp
 
 clean_all:
-	rm -f ${OBJECTS} ${APPNAME} ${DSONAME} src/core/moc_FabricDFGWidget.cpp	
+	rm -f ${OBJECTS} ${APPNAME} ${DSONAME} src/core/moc_${WIDGET}.cpp
