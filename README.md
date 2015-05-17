@@ -28,10 +28,10 @@ You will need Qt 4.8 to build FabricUI.
 Launch Houdini shell to get the Houdini environment (on Mac, ctrl + space > Houdini Terminal)
 
 Then source Fabric2.0 (already done if you just build FabricUI) and SpliceHoudini environments:
-> cd $FABRIC_PARENT_DIR/FabricEngine-pablo-Darwin-x86_64-20150514-182019
-> source environment.sh
-> cd $FABRIC_PARENT_DIR/SpliceHoudini
-> source environment.sh
+* cd $FABRIC_PARENT_DIR/FabricEngine-pablo-Darwin-x86_64-20150514-182019
+* source environment.sh
+* cd $FABRIC_PARENT_DIR/SpliceHoudini
+* source environment.sh
 
 
 To build and install plugin:
@@ -42,9 +42,7 @@ To clean:
 
 # Tests
 
-First add the SpliceHoudini DFG_Presets to your FABRIC_DFG_PATH:  
-export FABRIC_DFG_PATH=$SPLICE_HOUDINI_DIR/DFG_Presets:$FABRIC_DFG_PATH
-Then from your SpliceHoudini directory run: 
+From your SpliceHoudini directory run: 
 > cd test; hython loadScenes.py ; cd -
 
 Once tests are running well, you can start playing in Houdini !
