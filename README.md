@@ -1,6 +1,8 @@
 # OpenSpliceHoudini
 
-Open source version of Fabric Splice for SideFx Houdini
+A Fabric Splice integration for Houdini.
+
+Fabric Splice for Houdini allows you to make use of the Fabric Core inside of Houdini and use KL and the Fabric graph to perform computations using custom Houdini operators (SOP, OBJ, etc...).
 
 Here is a short video showing it in action: https://vimeo.com/127362431
 
@@ -45,3 +47,7 @@ From your SpliceHoudini directory run:
 * cd test; hython loadScenes.py ; cd -
 
 Once tests are running well, you can start playing in Houdini !
+
+# Licence
+
+The license used for this DCC integration can be found in the root folder of this repository.
