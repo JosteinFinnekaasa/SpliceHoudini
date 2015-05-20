@@ -10,7 +10,7 @@ namespace OpenSpliceHoudini
 {
 
 /// Create geometry from a Canvas graph. Only PolygonMesh type supported for the moment.
-/// For each output port of type PolygonMesh, the geometry will be copied to the Houdini geo detail
+/// For each output port of type PolygonMesh or PolygonMesh[], the geometry will be copied to the Houdini geo detail
 class SOP_FabricGenerator : public FabricDFGOP<SOP_Node>
 {
 public:
@@ -20,6 +20,10 @@ protected:
     SOP_FabricGenerator(OP_Network* net, const char* name, OP_Operator* op);
     virtual ~SOP_FabricGenerator();
     virtual OP_ERROR cookMySop(OP_Context& context);
+
+private:
+  void setPolygonMesh(FabricCore::RTVal rtMesh);
+  size_t m_groupIndex;
 };
 
 class OP_SOP_FabricGenerator : public OP_Operator

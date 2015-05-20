@@ -354,7 +354,8 @@ const DFGWrapper::PortList FabricDFGView::getPolygonMeshOutputPorts() const
     {
         if (port->getPortType() == FabricCore::DFGPortType_Out)
         {
-            if (std::string(port->getResolvedType()) == "PolygonMesh")
+            if (std::string(port->getResolvedType()) == "PolygonMesh" ||
+                std::string(port->getResolvedType()) == "PolygonMesh[]")
             {
                 outPorts.push_back(port);
             }

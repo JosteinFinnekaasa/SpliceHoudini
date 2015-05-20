@@ -24,12 +24,27 @@ class TestCase( unittest.TestCase ) :
 	def testLoadMultipleMeshes( self ) :		
 		hou.hipFile.load("./hip/multipleMeshOutputPorts.hipnc")
 
-		generator = hou.node('/obj/fabricObject1/fabricGenerator1')
+		generator = hou.node('/obj/geo1/fabricGenerator1')
 		geo = generator.geometry()
 
 		npPoints = len(geo.points())
-		self.assertEqual( npPoints, 11798 )
+		self.assertEqual( npPoints, 15753 )
 
+		delete = hou.node('/obj/geo1/delete1')
+		geo = delete.geometryAtFrame(0)
+		npPoints = len(geo.points())
+
+		self.assertEqual( npPoints, 2592 )
+
+		geo = delete.geometryAtFrame(1)
+		npPoints = len(geo.points())
+
+		self.assertEqual( npPoints, 12800 )
+
+		geo = delete.geometryAtFrame(2)
+		npPoints = len(geo.points())
+
+		self.assertEqual( npPoints, 361 )
 
 if __name__ == "__main__":
     unittest.main()
